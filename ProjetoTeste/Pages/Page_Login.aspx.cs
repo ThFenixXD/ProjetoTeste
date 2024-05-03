@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ProjetoTeste.Util;
@@ -13,7 +14,17 @@ namespace ProjetoTeste.Pages
 
         protected void AutenticarUsuario()
         {
-            Response.Redirect("Page_Home.aspx");
+            using (db_ProjetoTesteEntities ctx = new db_ProjetoTesteEntities())
+            {
+                var login = txtLogin.Text.Trim();
+                var query = (from obj in ctx.tb_login
+                             where obj.login == login
+                             select obj).FirstOrDefault();
+
+                FormsAuthentication.SetAuthCookie(query.login, false);
+
+                Response.Redirect("Page_Home.aspx");
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)

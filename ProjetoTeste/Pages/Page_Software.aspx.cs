@@ -24,7 +24,7 @@ namespace ProjetoTeste.Pages
         {
             txtSoftware.Text =
             hdfId.Value = "";
-            ddlFabricante.DataBind();
+            ddlFabricante.SelectedValue = "0";
         }
 
         protected void PopulaCampos(int _cdId)
