@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_ProjetoTesteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_chave">
+          <Key>
+            <PropertyRef Name="cdChave" />
+          </Key>
+          <Property Name="cdChave" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdFabricante" Type="int" Nullable="false" />
+          <Property Name="cdSoftware" Type="int" Nullable="false" />
+          <Property Name="cdTecnologia" Type="int" Nullable="false" />
+          <Property Name="chave" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="licenca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_fabricante">
+          <Key>
+            <PropertyRef Name="cdFabricante" />
+          </Key>
+          <Property Name="cdFabricante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fabricante" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_login">
+          <Key>
+            <PropertyRef Name="cdUser" />
+          </Key>
+          <Property Name="cdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_software">
+          <Key>
+            <PropertyRef Name="cdSoftware" />
+          </Key>
+          <Property Name="cdSoftware" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="software" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cdFabricante" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tecnologia">
+          <Key>
+            <PropertyRef Name="cdTecnologia" />
+          </Key>
+          <Property Name="cdTecnologia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tecnologia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_cdFabricante_tb_chave">
+          <End Role="tb_fabricante" Type="Self.tb_fabricante" Multiplicity="1" />
+          <End Role="tb_chave" Type="Self.tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fabricante">
+              <PropertyRef Name="cdFabricante" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdFabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdFabricante_tb_software">
+          <End Role="tb_fabricante" Type="Self.tb_fabricante" Multiplicity="1" />
+          <End Role="tb_software" Type="Self.tb_software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fabricante">
+              <PropertyRef Name="cdFabricante" />
+            </Principal>
+            <Dependent Role="tb_software">
+              <PropertyRef Name="cdFabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdSoftware_tb_chave">
+          <End Role="tb_software" Type="Self.tb_software" Multiplicity="1" />
+          <End Role="tb_chave" Type="Self.tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_software">
+              <PropertyRef Name="cdSoftware" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdSoftware" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdTecnologia_tb_chave">
+          <End Role="tb_tecnologia" Type="Self.tb_tecnologia" Multiplicity="1" />
+          <End Role="tb_chave" Type="Self.tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tecnologia">
+              <PropertyRef Name="cdTecnologia" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_ProjetoTesteModelStoreContainer">
+          <EntitySet Name="tb_chave" EntityType="Self.tb_chave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_fabricante" EntityType="Self.tb_fabricante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_login" EntityType="Self.tb_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_software" EntityType="Self.tb_software" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tecnologia" EntityType="Self.tb_tecnologia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cdFabricante_tb_chave" Association="Self.FK_cdFabricante_tb_chave">
+            <End Role="tb_fabricante" EntitySet="tb_fabricante" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdFabricante_tb_software" Association="Self.FK_cdFabricante_tb_software">
+            <End Role="tb_fabricante" EntitySet="tb_fabricante" />
+            <End Role="tb_software" EntitySet="tb_software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdSoftware_tb_chave" Association="Self.FK_cdSoftware_tb_chave">
+            <End Role="tb_software" EntitySet="tb_software" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdTecnologia_tb_chave" Association="Self.FK_cdTecnologia_tb_chave">
+            <End Role="tb_tecnologia" EntitySet="tb_tecnologia" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_ProjetoTesteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="db_ProjetoTesteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_chave" EntityType="db_ProjetoTesteModel.tb_chave" />
+          <EntitySet Name="tb_fabricante" EntityType="db_ProjetoTesteModel.tb_fabricante" />
+          <EntitySet Name="tb_software" EntityType="db_ProjetoTesteModel.tb_software" />
+          <EntitySet Name="tb_tecnologia" EntityType="db_ProjetoTesteModel.tb_tecnologia" />
+          <AssociationSet Name="FK_cdFabricante_tb_chave" Association="db_ProjetoTesteModel.FK_cdFabricante_tb_chave">
+            <End Role="tb_fabricante" EntitySet="tb_fabricante" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdSoftware_tb_chave" Association="db_ProjetoTesteModel.FK_cdSoftware_tb_chave">
+            <End Role="tb_software" EntitySet="tb_software" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdTecnologia_tb_chave" Association="db_ProjetoTesteModel.FK_cdTecnologia_tb_chave">
+            <End Role="tb_tecnologia" EntitySet="tb_tecnologia" />
+            <End Role="tb_chave" EntitySet="tb_chave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cdFabricante_tb_software" Association="db_ProjetoTesteModel.FK_cdFabricante_tb_software">
+            <End Role="tb_fabricante" EntitySet="tb_fabricante" />
+            <End Role="tb_software" EntitySet="tb_software" />
+          </AssociationSet>
+          <EntitySet Name="tb_login" EntityType="db_ProjetoTesteModel.tb_login" />
+        </EntityContainer>
+        <EntityType Name="tb_chave">
+          <Key>
+            <PropertyRef Name="cdChave" />
+          </Key>
+          <Property Name="cdChave" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdFabricante" Type="Int32" Nullable="false" />
+          <Property Name="cdSoftware" Type="Int32" Nullable="false" />
+          <Property Name="cdTecnologia" Type="Int32" Nullable="false" />
+          <Property Name="chave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="licenca" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_fabricante" Relationship="db_ProjetoTesteModel.FK_cdFabricante_tb_chave" FromRole="tb_chave" ToRole="tb_fabricante" />
+          <NavigationProperty Name="tb_software" Relationship="db_ProjetoTesteModel.FK_cdSoftware_tb_chave" FromRole="tb_chave" ToRole="tb_software" />
+          <NavigationProperty Name="tb_tecnologia" Relationship="db_ProjetoTesteModel.FK_cdTecnologia_tb_chave" FromRole="tb_chave" ToRole="tb_tecnologia" />
+        </EntityType>
+        <EntityType Name="tb_fabricante">
+          <Key>
+            <PropertyRef Name="cdFabricante" />
+          </Key>
+          <Property Name="cdFabricante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fabricante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_chave" Relationship="db_ProjetoTesteModel.FK_cdFabricante_tb_chave" FromRole="tb_fabricante" ToRole="tb_chave" />
+          <NavigationProperty Name="tb_software" Relationship="db_ProjetoTesteModel.FK_cdFabricante_tb_software" FromRole="tb_fabricante" ToRole="tb_software" />
+        </EntityType>
+        <EntityType Name="tb_software">
+          <Key>
+            <PropertyRef Name="cdSoftware" />
+          </Key>
+          <Property Name="cdSoftware" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="software" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cdFabricante" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_chave" Relationship="db_ProjetoTesteModel.FK_cdSoftware_tb_chave" FromRole="tb_software" ToRole="tb_chave" />
+          <NavigationProperty Name="tb_fabricante" Relationship="db_ProjetoTesteModel.FK_cdFabricante_tb_software" FromRole="tb_software" ToRole="tb_fabricante" />
+        </EntityType>
+        <EntityType Name="tb_tecnologia">
+          <Key>
+            <PropertyRef Name="cdTecnologia" />
+          </Key>
+          <Property Name="cdTecnologia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tecnologia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_chave" Relationship="db_ProjetoTesteModel.FK_cdTecnologia_tb_chave" FromRole="tb_tecnologia" ToRole="tb_chave" />
+        </EntityType>
+        <Association Name="FK_cdFabricante_tb_chave">
+          <End Type="db_ProjetoTesteModel.tb_fabricante" Role="tb_fabricante" Multiplicity="1" />
+          <End Type="db_ProjetoTesteModel.tb_chave" Role="tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fabricante">
+              <PropertyRef Name="cdFabricante" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdFabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdSoftware_tb_chave">
+          <End Type="db_ProjetoTesteModel.tb_software" Role="tb_software" Multiplicity="1" />
+          <End Type="db_ProjetoTesteModel.tb_chave" Role="tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_software">
+              <PropertyRef Name="cdSoftware" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdSoftware" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdTecnologia_tb_chave">
+          <End Type="db_ProjetoTesteModel.tb_tecnologia" Role="tb_tecnologia" Multiplicity="1" />
+          <End Type="db_ProjetoTesteModel.tb_chave" Role="tb_chave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tecnologia">
+              <PropertyRef Name="cdTecnologia" />
+            </Principal>
+            <Dependent Role="tb_chave">
+              <PropertyRef Name="cdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cdFabricante_tb_software">
+          <End Type="db_ProjetoTesteModel.tb_fabricante" Role="tb_fabricante" Multiplicity="1" />
+          <End Type="db_ProjetoTesteModel.tb_software" Role="tb_software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fabricante">
+              <PropertyRef Name="cdFabricante" />
+            </Principal>
+            <Dependent Role="tb_software">
+              <PropertyRef Name="cdFabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_login">
+          <Key>
+            <PropertyRef Name="cdUser" />
+          </Key>
+          <Property Name="cdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_ProjetoTesteModelStoreContainer" CdmEntityContainer="db_ProjetoTesteEntities">
+          <EntitySetMapping Name="tb_chave">
+            <EntityTypeMapping TypeName="db_ProjetoTesteModel.tb_chave">
+              <MappingFragment StoreEntitySet="tb_chave">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="licenca" ColumnName="licenca" />
+                <ScalarProperty Name="chave" ColumnName="chave" />
+                <ScalarProperty Name="cdTecnologia" ColumnName="cdTecnologia" />
+                <ScalarProperty Name="cdSoftware" ColumnName="cdSoftware" />
+                <ScalarProperty Name="cdFabricante" ColumnName="cdFabricante" />
+                <ScalarProperty Name="cdChave" ColumnName="cdChave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_fabricante">
+            <EntityTypeMapping TypeName="db_ProjetoTesteModel.tb_fabricante">
+              <MappingFragment StoreEntitySet="tb_fabricante">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="fabricante" ColumnName="fabricante" />
+                <ScalarProperty Name="cdFabricante" ColumnName="cdFabricante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_software">
+            <EntityTypeMapping TypeName="db_ProjetoTesteModel.tb_software">
+              <MappingFragment StoreEntitySet="tb_software">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="cdFabricante" ColumnName="cdFabricante" />
+                <ScalarProperty Name="software" ColumnName="software" />
+                <ScalarProperty Name="cdSoftware" ColumnName="cdSoftware" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tecnologia">
+            <EntityTypeMapping TypeName="db_ProjetoTesteModel.tb_tecnologia">
+              <MappingFragment StoreEntitySet="tb_tecnologia">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="tecnologia" ColumnName="tecnologia" />
+                <ScalarProperty Name="cdTecnologia" ColumnName="cdTecnologia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_login">
+            <EntityTypeMapping TypeName="db_ProjetoTesteModel.tb_login">
+              <MappingFragment StoreEntitySet="tb_login">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="cdUser" ColumnName="cdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

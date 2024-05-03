@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b0bac84b4a6e48b4a1a73858d7c5f21a" Name="Diagram1">
+        <EntityTypeShape EntityType="db_ProjetoTesteModel.tb_chave" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="db_ProjetoTesteModel.tb_fabricante" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="db_ProjetoTesteModel.tb_software" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="db_ProjetoTesteModel.tb_tecnologia" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="db_ProjetoTesteModel.FK_cdFabricante_tb_chave" />
+        <AssociationConnector Association="db_ProjetoTesteModel.FK_cdSoftware_tb_chave" />
+        <AssociationConnector Association="db_ProjetoTesteModel.FK_cdTecnologia_tb_chave" />
+        <AssociationConnector Association="db_ProjetoTesteModel.FK_cdFabricante_tb_software" />
+        <EntityTypeShape EntityType="db_ProjetoTesteModel.tb_login" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
